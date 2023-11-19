@@ -1,4 +1,24 @@
-#carouselExampleDark img{border: 2px solid rgb(0, 0, 0); 
-    
-    height: 30vw;
+#carouselExampleControls img{border: 2px solid rgb(0, 0, 0); 
+    width: 100% !important;
+    height: 30vw !important;
 }
+
+.div-imagen{
+    width: 100% !important;
+    height: 500px !important;
+}
+
+.div-imagen > img {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.tamañocard{
+    width: 18rem !important;
+}
+
+.tamañocard > img {
+    width: 100% !important;
+    height: 50% !important;
+}
+
