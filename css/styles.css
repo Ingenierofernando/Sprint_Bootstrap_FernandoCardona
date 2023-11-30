@@ -1,11 +1,12 @@
 #carouselExampleControls img{border: 2px solid rgb(0, 0, 0); 
     width: 100% !important;
-    height: 30vw !important;
+    height: 400px !important;
 }
 
 .div-imagen{
     width: 100% !important;
-    height: 500px !important;
+    height: 100% !important;
+    
 }
 
 .div-imagen > img {
@@ -15,10 +16,11 @@
 
 .tamañocard{
     width: 18rem !important;
+    height: 400px !important;
+    border: solid 2px rgb(138, 138, 138) !important;
 }
 
 .tamañocard > img {
     width: 100% !important;
-    height: 50% !important;
+    height: 184px !important;
 }
-

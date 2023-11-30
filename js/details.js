@@ -211,7 +211,11 @@ for (let i = 0; i < data.events.length; i++) {
     bannerItem.innerHTML = `
       <img src="${data.events[i].image}" class="d-block w-100" alt="...">
     `;
-    
+    let caption = document.createElement("div");
+    caption.classList.add("carousel-caption")
+    caption.innerHTML = `<h1>DETAILS</h1>`
+    bannerprincipal.appendChild(bannerItem);
+    bannerItem.appendChild(caption);
     bannerprincipal.appendChild(bannerItem);
   }
 }

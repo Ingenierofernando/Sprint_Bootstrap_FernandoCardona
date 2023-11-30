@@ -211,7 +211,12 @@ for (let i = 0; i < data.events.length; i++) {
     bannerItem.innerHTML = `
       <img src="${data.events[i].image}" class="d-block w-100" alt="...">
     `;
-    
+    let caption = document.createElement("div");
+    caption.classList.add("carousel-caption")
+    caption.innerHTML = `<h1>PAST EVENTS</h1>`
+    bannerprincipal.appendChild(bannerItem);
+    bannerItem.appendChild(caption);
+
     bannerprincipal.appendChild(bannerItem);
   }
 }
@@ -285,13 +290,13 @@ function pintartarjetasde4en4(arregloevent, divprincipal) {
     }
 
     let contenedor = document.createElement("div");
-    contenedor.classList.add("div-imagen", "d-flex", "justify-content-around", "p-5");
+    contenedor.classList.add("div-imagen","d-flex", "flex-wrap", "justify-content-around", "p-5", "container-col-lg", "container-col-md", "container-mx-auto");
 
     for (let j = i; j < i + 4; j++) {
 
       if (arregloevent[j] != undefined) {
         let card = document.createElement("div");
-        card.classList.add("card", "tamañocard");
+        card.classList.add("card", "tamañocard","m-1");
 
         card.innerHTML = `          
     <img src="${arregloevent[j].image}" class="card-img-top img-fluid img-fluid img-thumbnail d-block w-100"

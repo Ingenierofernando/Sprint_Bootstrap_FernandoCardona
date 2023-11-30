@@ -211,8 +211,11 @@ for (let i = 0; i < data.events.length; i++) {
     bannerItem.innerHTML = `
       <img src="${data.events[i].image}" class="d-block w-100" alt="...">
     `;
-    
+   let caption = document.createElement("div");
+    caption.classList.add("carousel-caption")
+    caption.innerHTML = `<h1>HOME</h1>`
     bannerprincipal.appendChild(bannerItem);
+    bannerItem.appendChild(caption);
   }
 }
 
@@ -221,10 +224,25 @@ for (let i = 0; i < data.events.length; i++) {
 let carruselprincipal = document.getElementById("carrusel-Principal");
 pintartarjetasde4en4(data.events, carruselprincipal)
 
+
 // funcion eventos
 function pintartarjetasde4en4(arregloevent, divprincipal) {
   
+  divprincipal.innerHTML = ""
 
+  if (arregloevent.length == 0) {
+    divprincipal.innerHTML =
+      `          
+    <img src="https://cdn.dribbble.com/users/212949/screenshots/856197/media/da184ca3dabff52a03119a3d6922fbb9.png?resize=400x300&vertical=center" class="d-block w-100 tamañocard" alt="...">
+    `;
+   let caption = document.createElement("div");
+    caption.classList.add("carousel-caption", "badge", "text-white", "mt-5")
+    caption.innerHTML = `
+    
+    <h1 >No hay tarjetas que coincidan con estas palabra</h1>
+    `
+    divprincipal.appendChild(caption);
+  }
 
 for (let i = 0; i < arregloevent.length; i+=4) {
   let carruselItem
@@ -239,13 +257,13 @@ carruselItem.classList.add("carousel-item");
   }
 
   let contenedor = document.createElement("div");
-contenedor.classList.add("div-imagen","d-flex", "justify-content-around", "p-5");
+contenedor.classList.add("div-imagen","d-flex", "flex-wrap", "justify-content-around", "p-5", "container-col-lg", "container-col-md", "container-mx-auto");
   
 for (let j = i; j < i + 4; j++) {
   
   if (arregloevent[j] != undefined){
   let card = document.createElement("div");
-card.classList.add("card", "tamañocard");
+card.classList.add("card", "tamañocard", "m-1");
 
 card.innerHTML = `          
     <img src="${arregloevent[j].image}" class="card-img-top img-fluid img-fluid img-thumbnail d-block w-100"
@@ -266,4 +284,80 @@ carruselItem.appendChild(contenedor);
 divprincipal.appendChild(carruselItem);
 }
 
+}
+
+// filtrar checkbox seleccionados
+let contenedorcheckbox = document.getElementById("contenedorcheckbox");
+
+
+// nuevo arreglo de sólo categorias
+// let arreglocheckbox = data.events.map(events => events.category);
+
+// nuevo arreglo checkbox quitando los duplicados y los trae en un nodo
+// arreglocheckbox = new Set(arreglocheckbox);
+
+// convirtiendo el nodo en un array o arreglo
+// arreglocheckbox = Array.from(arreglocheckbox)
+
+//código anterior simplificado
+let arreglocheckbox = Array.from(new Set(data.events.map(events => events.category)))
+
+
+// funcion pintar checkbox
+pintarcheckbox(arreglocheckbox,contenedorcheckbox)
+
+contenedorcheckbox.addEventListener("change", e => {
+  let checked = Array.from(document.querySelectorAll("input[type=checkbox]:checked")).map(checkbox => checkbox.value.toLowerCase())
+  
+
+
+  let nuevoarreglo;
+
+  // Verificar si no hay checkboxes seleccionados
+  if (checked.length === 0) {
+    // Si no hay checkboxes seleccionados, mostrar todas las tarjetas
+    nuevoarreglo = data.events;
+  } else {
+    // Filtrar por checkboxes seleccionados
+    nuevoarreglo = filtrarporcheckbox(data.events, checked);
+  }
+
+  pintartarjetasde4en4(nuevoarreglo, carruselprincipal);
+})
+
+// funcion pintar checkbox seleccionado
+function pintarcheckbox(arreglocheckbox, divcheckbox) {
+  for (let i = 0; i < arreglocheckbox.length; i++) {
+    if (arreglocheckbox[i] != undefined) {
+      let checkbox = document.createElement("div")
+      checkbox.classList.add("form-check", "form-check-inline")
+      checkbox.innerHTML = `<input class="form-check-input" type="checkbox" value="${arreglocheckbox[i]}"  id="${arreglocheckbox[i]}">
+  <label class="form-check-label" for="${arreglocheckbox[i]}">${arreglocheckbox[i]}</label>`
+      divcheckbox.appendChild(checkbox)
+    }
+    
+  }
+}
+// funcion filtrar chechbox seleccionados
+function filtrarporcheckbox(arreglo, arreglocheck) {
+  let arreglofinal = arreglo.filter(events => arreglocheck.includes(events.category.toLowerCase()));
+  console.log(arreglofinal);
+  return arreglofinal
+}
+
+
+//funcion filtrar en el buscador o Search
+
+let buscador = document.getElementById("inputBuscador");
+buscador.addEventListener("keyup", e => {
+  console.log(e.target.value);
+  let nuevoarreglobuscar = filtrarInputBuscar(data.events, e.target.value)
+  console.log(nuevoarreglobuscar);
+  pintartarjetasde4en4(nuevoarreglobuscar, carruselprincipal);
+})
+
+// funcion filtar
+function filtrarInputBuscar(arregloBuscar, palabraTexto) {
+  let filtrarBuscar = arregloBuscar.filter(eventoFiltroBuscar => eventoFiltroBuscar.name.toLowerCase().includes(palabraTexto.toLowerCase()) || eventoFiltroBuscar.description.toLowerCase().includes(palabraTexto.toLowerCase())); 
+return filtrarBuscar
 }
