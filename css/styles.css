@@ -24,3 +24,8 @@
     width: 100% !important;
     height: 184px !important;
 }
+
+img > #imgen{
+    width: 100% !important;
+    height: 500px;
+}

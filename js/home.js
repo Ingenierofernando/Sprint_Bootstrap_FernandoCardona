@@ -273,7 +273,7 @@ card.innerHTML = `
         <p class="card-text text-center">${arregloevent[j].description}</p>
         <div class="container container-fluid d-flex justify-content-between">
             <p>Price: ${arregloevent[j].price}</p>
-            <a href="./details.html" class="btn btn-primary">Details</a>
+            <a href="./details.html?id=${arregloevent[j]._id}" class="btn btn-primary">Details</a>
         </div>
     </div>`
 
@@ -308,7 +308,7 @@ pintarcheckbox(arreglocheckbox,contenedorcheckbox)
 
 contenedorcheckbox.addEventListener("change", e => {
   let checked = Array.from(document.querySelectorAll("input[type=checkbox]:checked")).map(checkbox => checkbox.value.toLowerCase())
-  
+  let palabraTexto = document.getElementById("inputBuscador").value;
 
 
   let nuevoarreglo;
@@ -320,6 +320,7 @@ contenedorcheckbox.addEventListener("change", e => {
   } else {
     // Filtrar por checkboxes seleccionados
     nuevoarreglo = filtrarporcheckbox(data.events, checked);
+    nuevoarreglo = filtrarInputBuscar(nuevoarreglo,palabraTexto)
   }
 
   pintartarjetasde4en4(nuevoarreglo, carruselprincipal);
@@ -346,17 +347,28 @@ function filtrarporcheckbox(arreglo, arreglocheck) {
 }
 
 
-//funcion filtrar en el buscador o Search
+//función filtrar en el buscador o Search
 
 let buscador = document.getElementById("inputBuscador");
+
 buscador.addEventListener("keyup", e => {
   console.log(e.target.value);
+  let checked = Array.from(document.querySelectorAll("input[type=checkbox]:checked")).map(checkbox => checkbox.value.toLowerCase());
   let nuevoarreglobuscar = filtrarInputBuscar(data.events, e.target.value)
+  // if (checked.length == 0) {
+  //   pintartarjetasde4en4(nuevoarreglobuscar, carruselprincipal);
+  // } else {
+  //   nuevoarreglobuscar = filtrarporcheckbox(nuevoarreglobuscar,checked)
+  // }
+  
+  if (checked.length != 0) {
+  nuevoarreglobuscar = filtrarporcheckbox(nuevoarreglobuscar,checked)
+}
   console.log(nuevoarreglobuscar);
   pintartarjetasde4en4(nuevoarreglobuscar, carruselprincipal);
 })
 
-// funcion filtar
+// función filtrar
 function filtrarInputBuscar(arregloBuscar, palabraTexto) {
   let filtrarBuscar = arregloBuscar.filter(eventoFiltroBuscar => eventoFiltroBuscar.name.toLowerCase().includes(palabraTexto.toLowerCase()) || eventoFiltroBuscar.description.toLowerCase().includes(palabraTexto.toLowerCase())); 
 return filtrarBuscar

@@ -303,7 +303,7 @@ function pintartarjetasde4en4(arregloevent, divprincipal) {
         <p class="card-text text-center">${arregloevent[j].description}</p>
         <div class="container container-fluid d-flex justify-content-between">
             <p>Price: ${arregloevent[j].price}</p>
-            <a href="./details.html" class="btn btn-primary">Details</a>
+            <a href="./details.html?id=${arregloevent[j]._id}" class="btn btn-primary">Details</a>
         </div>
     </div>`
 
