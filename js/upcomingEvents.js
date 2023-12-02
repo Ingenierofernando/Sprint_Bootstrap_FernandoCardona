@@ -194,7 +194,7 @@ const data = {
     },
   ],
 };
-
+//.****************************************************************************************.
 //carrusel banner
 let bannerprincipal = document.getElementById("banner-principal");
 
@@ -224,39 +224,84 @@ for (let i = 0; i < data.events.length; i++) {
 
 
 
-
+//.****************************************************************************************.
 // carrusel card Upcoming Events
 let carruselprincipal = document.getElementById("carrusel-Principal");
 
 let eventoProximo = proximosEventos(data.events,data.currentDate)
-console.log(data.events);
+console.log(eventoProximo);
 
-let pasadoyfuturo = eventospasadosfuturos(data.events,data.currentDate,true);
-console.log(pasadoyfuturo);
+// let pasadoyfuturo = eventospasadosfuturos(data.events,data.currentDate,true);
+// console.log(pasadoyfuturo);
 
 pintartarjetasde4en4(eventoProximo, carruselprincipal)
 console.log(eventoProximo);
 
+
+//.****************************************************************************************.
 // función combinada
 
-function eventospasadosfuturos(arreglo,fecha,pasadosfuturos) {
-  let nuevoArreglo = [];
-  for (let i = 0; i < arreglo.length; i++) {
-    if (pasadosfuturos == true) {
-      if (arreglo[i].date > fecha) {
-        nuevoArreglo.push(arreglo[i]);
-      }
-    }else{
-      if (arreglo[i].date < fecha) {
-        nuevoArreglo.push(arreglo[i]);
-      }
-    }
+// function eventospasadosfuturos(arreglo,fecha,pasadosfuturos) {
+//   let nuevoArreglo = [];
+//   for (let i = 0; i < arreglo.length; i++) {
+//     if (pasadosfuturos == true) {
+//       if (arreglo[i].date > fecha) {
+//         nuevoArreglo.push(arreglo[i]);
+//       }
+//     }else{
+//       if (arreglo[i].date < fecha) {
+//         nuevoArreglo.push(arreglo[i]);
+//       }
+//     }
     
-  }
-  return nuevoArreglo;
+//   }
+//   return nuevoArreglo;
+// }
+
+
+//.****************************************************************************************.
+// filtrar checkbox seleccionados
+let contenedorcheckbox = document.getElementById("contenedorcheckbox");
+
+
+// nuevo arreglo de sólo categorias
+// let arreglocheckbox = data.events.map(events => events.category);
+
+// nuevo arreglo checkbox quitando los duplicados y los trae en un nodo
+// arreglocheckbox = new Set(arreglocheckbox);
+
+// convirtiendo el nodo en un array o arreglo
+// arreglocheckbox = Array.from(arreglocheckbox)
+
+//código anterior simplificado
+let arreglocheckbox = Array.from(new Set(data.events.map(events => events.category)))
+
+
+// funcion pintar checkbox
+pintarcheckbox(arreglocheckbox,contenedorcheckbox)
+
+contenedorcheckbox.addEventListener("change", e => {
+let checked = Array.from(document.querySelectorAll("input[type=checkbox]:checked")).map(checkbox => checkbox.value.toLowerCase())
+let palabraTexto = document.getElementById("inputBuscador").value;
+
+
+let nuevoarreglo;
+
+// Verificar si no hay checkboxes seleccionados
+if (checked.length === 0) {
+  // Si no hay checkboxes seleccionados, mostrar todas las tarjetas
+  nuevoarreglo = eventoProximo;
+} else {
+  // Filtrar por checkboxes seleccionados
+  nuevoarreglo = filtrarporcheckbox(eventoProximo, checked);
+  nuevoarreglo = filtrarInputBuscar(nuevoarreglo,palabraTexto)
 }
 
+pintartarjetasde4en4(nuevoarreglo, carruselprincipal);
+})
 
+
+//.****************************************************************************************.
 
 function proximosEventos(arreglo,fecha) {
   let nuevoArreglo = [] // Inicializar como un array vacío
@@ -269,10 +314,26 @@ function proximosEventos(arreglo,fecha) {
   
 }
 
-
+//.****************************************************************************************.
 
 // funcion eventos
 function pintartarjetasde4en4(arregloevent, divprincipal) {
+
+  divprincipal.innerHTML = "";
+
+  if (arregloevent.length == 0) {
+    divprincipal.innerHTML =
+      `          
+    <img src="https://cdn.dribbble.com/users/212949/screenshots/856197/media/da184ca3dabff52a03119a3d6922fbb9.png?resize=400x300&vertical=center" class="d-block w-100 tamañocard" alt="...">
+    `;
+   let caption = document.createElement("div");
+    caption.classList.add("carousel-caption", "badge", "text-white", "mt-5")
+    caption.innerHTML = `
+    
+    <h1 >No hay tarjetas que coincidan con esta palabra</h1>
+    `
+    divprincipal.appendChild(caption);
+  }
 
   for (let i = 0; i < arregloevent.length; i += 4) {
     let carruselItem
@@ -314,4 +375,59 @@ function pintartarjetasde4en4(arregloevent, divprincipal) {
     divprincipal.appendChild(carruselItem);
   }
 
+}
+
+//.****************************************************************************************.
+
+
+
+// funcion pintar checkbox seleccionado
+function pintarcheckbox(arreglocheckbox, divcheckbox) {
+for (let i = 0; i < arreglocheckbox.length; i++) {
+  if (arreglocheckbox[i] != undefined) {
+    let checkbox = document.createElement("div")
+    checkbox.classList.add("form-check", "form-check-inline")
+    checkbox.innerHTML = `<input class="form-check-input" type="checkbox" value="${arreglocheckbox[i]}"  id="${arreglocheckbox[i]}">
+<label class="form-check-label" for="${arreglocheckbox[i]}">${arreglocheckbox[i]}</label>`
+    divcheckbox.appendChild(checkbox)
+  }
+  
+}
+}
+
+
+// funcion filtrar chechbox seleccionados
+function filtrarporcheckbox(arreglo, arreglocheck) {
+let arreglofinal = arreglo.filter(events => arreglocheck.includes(events.category.toLowerCase()));
+console.log(arreglofinal);
+return arreglofinal
+}
+
+//.****************************************************************************************.
+//función filtrar en el buscador o Search
+
+let buscador = document.getElementById("inputBuscador");
+
+buscador.addEventListener("keyup", e => {
+console.log(e.target.value);
+let checked = Array.from(document.querySelectorAll("input[type=checkbox]:checked")).map(checkbox => checkbox.value.toLowerCase());
+let nuevoarreglobuscar = filtrarInputBuscar(eventoProximo, e.target.value)
+console.log(nuevoarreglobuscar);
+// if (checked.length == 0) {
+//   pintartarjetasde4en4(nuevoarreglobuscar, carruselprincipal);
+// } else {
+//   nuevoarreglobuscar = filtrarporcheckbox(nuevoarreglobuscar,checked)
+// }
+
+if (checked.length != 0) {
+nuevoarreglobuscar = filtrarporcheckbox(nuevoarreglobuscar,checked)
+}
+console.log(nuevoarreglobuscar);
+pintartarjetasde4en4(nuevoarreglobuscar, carruselprincipal);
+})
+
+// función filtrar
+function filtrarInputBuscar(arregloBuscar, palabraTexto) {
+let filtrarBuscar = arregloBuscar.filter(eventoFiltroBuscar => eventoFiltroBuscar.name.toLowerCase().includes(palabraTexto.toLowerCase()) || eventoFiltroBuscar.description.toLowerCase().includes(palabraTexto.toLowerCase())); 
+return filtrarBuscar
 }
