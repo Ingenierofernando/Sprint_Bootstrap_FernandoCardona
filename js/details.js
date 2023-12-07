@@ -1,316 +1,128 @@
-const data = {
-    currentDate: "2023-01-01",
-    events: [
-      {
-        _id: "639c723b992482e5f2834be9",
-        name: "Collectivities Party",
-        image: "https://i.postimg.cc/Fs03hQDt/Collectivities-Party.jpg",
-        date: "2022-12-12",
-        description:
-          "Enjoy your favourite dishes, from different countries, in a unique event for the whole family.",
-        category: "Food Fair",
-        place: "Room A",
-        capacity: 45000,
-        assistance: 42756,
-        price: 5,
-        __v: 0,
-      },
-      {
-        _id: "639c723b992482e5f2834beb",
-        name: "Korean style",
-        image: "https://i.postimg.cc/ZmD3Xf57/Korean-style.jpg",
-        date: "2023-08-12",
-        description:
-          "Enjoy the best Korean dishes, with international chefs and awesome events.",
-        category: "Food Fair",
-        place: "Room A",
-        capacity: 45000,
-        price: 10,
-        __v: 0,
-        estimate: 42756,
-      },
-      {
-        _id: "639c723c992482e5f2834bed",
-        name: "Jurassic Park",
-        image: "https://i.postimg.cc/GmHRkbNV/Jurassic-Park.jpg",
-        date: "2022-11-02",
-        description:
-          "Let's go meet the biggest dinosaurs in the paleontology museum.",
-        category: "Museum",
-        place: "Field",
-        capacity: 82000,
-        price: 15,
-        __v: 0,
-        assistance: 65892,
-      },
-      {
-        _id: "639c723c992482e5f2834bef",
-        name: "Parisian Museum",
-        image: "https://i.postimg.cc/c4C2zXm8/Parisian-Museum.jpg",
-        date: "2023-11-02",
-        description:
-          "A unique tour in the city of lights, get to know one of the most iconic places.",
-        category: "Museum",
-        place: "Paris",
-        capacity: 8200,
-        estimate: 8200,
-        price: 3500,
-        __v: 0,
-      },
-      {
-        _id: "639c723c992482e5f2834bf1",
-        name: "Comicon",
-        image: "https://i.postimg.cc/KYD0jMf2/comicon.jpg",
-        date: "2022-02-12",
-        description:
-          "For comic lovers, all your favourite characters gathered in one place.",
-        category: "Costume Party",
-        place: "Room C",
-        capacity: 120000,
-        assistance: 110000,
-        price: 54,
-        __v: 0,
-      },
-      {
-        _id: "639c723c992482e5f2834bf3",
-        name: "Halloween Night",
-        image: "https://i.postimg.cc/RZ9fH4Pr/halloween.jpg",
-        date: "2023-02-12",
-        description: "Come with your scariest costume and win incredible prizes.",
-        category: "Costume Party",
-        place: "Room C",
-        capacity: 12000,
-        estimate: 9000,
-        price: 12,
-        __v: 0,
-      },
-      {
-        _id: "639c723c992482e5f2834bf5",
-        name: "Metallica in concert",
-        image: "https://i.postimg.cc/PrMJ0ZMc/Metallica-in-concert.jpg",
-        date: "2023-01-22",
-        description: "The only concert of the most emblematic band in the world.",
-        category: "Music Concert",
-        place: "Room A",
-        capacity: 138000,
-        estimate: 138000,
-        price: 150,
-        __v: 0,
-      },
-      {
-        _id: "639c723c992482e5f2834bf7",
-        name: "Electronic Fest",
-        image: "https://i.postimg.cc/KvsSK8cj/Electronic-Fest.jpg",
-        date: "2022-01-22",
-        description:
-          "The best national and international DJs gathered in one place.",
-        category: "Music Concert",
-        place: "Room A",
-        capacity: 138000,
-        assistance: 110300,
-        price: 250,
-        __v: 0,
-      },
-      {
-        _id: "639c723d992482e5f2834bf9",
-        name: "10K for life",
-        image: "https://i.postimg.cc/fyLqZY9K/10-K-for-life.jpg",
-        date: "2022-03-01",
-        description: "Come and exercise, improve your health and lifestyle.",
-        category: "Race",
-        place: "Soccer field",
-        capacity: 30000,
-        assistance: 25698,
-        price: 3,
-        __v: 0,
-      },
-      {
-        _id: "639c723d992482e5f2834bfb",
-        name: "15K NY",
-        image: "https://i.postimg.cc/zv67r65z/15kny.jpg",
-        date: "2023-03-01",
-        description:
-          "We'll be raising funds for hospitals and medical care in this unique event held in The Big Apple.",
-        category: "Race",
-        place: "New York",
-        capacity: 3000000,
-        price: 3,
-        __v: 0,
-        estimate: 2569800,
-      },
-      {
-        _id: "639c723d992482e5f2834bfd",
-        name: "School's book fair",
-        image: "https://i.postimg.cc/Sst763n6/book1.jpg",
-        date: "2023-10-15",
-        description: "Bring your unused school book and take the one you need.",
-        category: "Book Exchange",
-        place: "Room D1",
-        capacity: 150000,
-        estimate: 123286,
-        price: 1,
-        __v: 0,
-      },
-      {
-        _id: "639c723d992482e5f2834bff",
-        name: "Just for your kitchen",
-        image: "https://i.postimg.cc/05FhxHVK/book4.jpg",
-        date: "2022-11-09",
-        description:
-          "If you're a gastronomy lover come get the cookbook that best suits your taste and your family's.",
-        category: "Book Exchange",
-        place: "Room D6",
-        capacity: 130000,
-        assistance: 90000,
-        price: 100,
-        __v: 0,
-      },
-      {
-        _id: "639c723d992482e5f2834c01",
-        name: "Batman",
-        image: "https://i.postimg.cc/vH52y81C/cinema4.jpg",
-        date: "2022-3-11",
-        description: "Come see Batman fight crime in Gotham City.",
-        category: "Cinema",
-        place: "Room D1",
-        capacity: 11000,
-        assistance: 9300,
-        price: 225,
-        __v: 0,
-      },
-      {
-        _id: "639c723d992482e5f2834c03",
-        name: "Avengers",
-        image: "https://i.postimg.cc/T3C92KTN/scale.jpg",
-        date: "2023-10-15",
-        description:
-          "Marvel's Avengers Premier in 3d, the start of an epic saga with your favourite superheroes.",
-        category: "Cinema",
-        place: "Room D1",
-        capacity: 9000,
-        estimate: 9000,
-        price: 250,
-        __v: 0,
-      },
-    ],
-  };
+let url = "https://mindhub-xj03.onrender.com/api/amazing"
 
-//carrusel banner
-  let bannerprincipal = document.getElementById("banner-principal");
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
 
-for (let i = 0; i < data.events.length; i++) {
-  let bannerItem = document.createElement("div");
 
-  if (i === 0) {
-    bannerItem.classList.add("carousel-item", "active");
-  } else {
-    bannerItem.classList.add("carousel-item");
-  }
+    //carrusel banner
+    let bannerprincipal = document.getElementById("banner-principal");
 
-  if (data.events[i] !== undefined) {
-    bannerItem.innerHTML = `
+    for (let i = 0; i < data.events.length; i++) {
+      let bannerItem = document.createElement("div");
+
+      if (i === 0) {
+        bannerItem.classList.add("carousel-item", "active");
+      } else {
+        bannerItem.classList.add("carousel-item");
+      }
+
+      if (data.events[i] !== undefined) {
+        bannerItem.innerHTML = `
       <img src="${data.events[i].image}" class="d-block w-100" alt="...">
     `;
-    let caption = document.createElement("div");
-    caption.classList.add("carousel-caption")
-    caption.innerHTML = `<h1>DETAILS</h1>`
-    bannerprincipal.appendChild(bannerItem);
-    bannerItem.appendChild(caption);
-    bannerprincipal.appendChild(bannerItem);
-  }
-}
+        let caption = document.createElement("div");
+        caption.classList.add("carousel-caption")
+        caption.innerHTML = `<h1>DETAILS</h1>`
+        bannerprincipal.appendChild(bannerItem);
+        bannerItem.appendChild(caption);
+        bannerprincipal.appendChild(bannerItem);
+      }
+    }
 
 
-//.******************************************.
-// URLSearchParams para enviar url a otras páginas
+    //.******************************************.
+    // URLSearchParams para enviar url a otras páginas
 
-let url = window.location
-let urlString = window.location.href
+    let url = window.location
+    let urlString = window.location.href
 
-console.log(url);
-console.log(urlString);
+    console.log(url);
+    console.log(urlString);
 
-let urlArmada = new URL(urlString)
-console.log(urlArmada);
+    let urlArmada = new URL(urlString)
+    console.log(urlArmada);
 
-let parametros = new URLSearchParams(urlArmada.search)
-console.log(parametros);
+    let parametros = new URLSearchParams(urlArmada.search)
+    console.log(parametros);
 
-console.log(parametros.has('id'));
-let id = parametros.get("id")
-console.log(id);
+    console.log(parametros.has('id'));
+    let id = parametros.get("id")
+    console.log(id);
 
-let datoseventos = data.events.filter((eventos) => eventos._id == id)
-console.log(datoseventos);
+    let datoseventos = data.events.filter((eventos) => eventos._id == id)
+    console.log(datoseventos);
 
-console.log(data);
+    console.log(data);
 
 
 
-document.getElementById("imagen").src = datoseventos[0].image
-document.getElementById("tituloDetails").innerHTML = datoseventos[0].name
-document.getElementById("descripcionDetails").innerHTML = datoseventos[0].description
-document.getElementById("precioDetails").innerHTML = "Precio:" + " " + datoseventos[0].price
-//.*********************************************.
+    document.getElementById("imagen").src = datoseventos[0].image
+    document.getElementById("tituloDetails").innerHTML = datoseventos[0].name
+    document.getElementById("descripcionDetails").innerHTML = datoseventos[0].description
+    document.getElementById("precioDetails").innerHTML = "Precio:" + " " + datoseventos[0].price
+    //.*********************************************.
 
-// cards carrusel código quemado
+    // cards carrusel código quemado
 
-// let carruselprincipal = document.getElementById("carrusel-Principal");
+    // let carruselprincipal = document.getElementById("carrusel-Principal");
 
-// for (let i = 0; i < data.events.length; i++) {
-//   let carruselItem = document.createElement("div");
+    // for (let i = 0; i < data.events.length; i++) {
+    //   let carruselItem = document.createElement("div");
 
-//   if (i === 0) {
-//     carruselItem.classList.add("carousel-item", "active", "div-imagen");
-//   } else {
-//     carruselItem.classList.add("carousel-item", "div-imagen");
-//   }
+    //   if (i === 0) {
+    //     carruselItem.classList.add("carousel-item", "active", "div-imagen");
+    //   } else {
+    //     carruselItem.classList.add("carousel-item", "div-imagen");
+    //   }
 
-//   if (data.events[i] !== undefined) {
-//     carruselItem.innerHTML = `
-//       <img src="${data.events[i].image}" class="d-block w-100" alt="...">`
-    
-    
-//     carruselprincipal.appendChild(carruselItem);
-//   }
-// }
+    //   if (data.events[i] !== undefined) {
+    //     carruselItem.innerHTML = `
+    //       <img src="${data.events[i].image}" class="d-block w-100" alt="...">`
 
-// // Títulos y parrafos en card carrusel details
 
-// let parrafoprincipal = document.getElementById("parrafo-principal");
+    //     carruselprincipal.appendChild(carruselItem);
+    //   }
+    // }
 
-// // Crea el título fuera del bucle
-// let tituloh5 = document.createElement("h5");
-// tituloh5.classList.add("card-title");
-// tituloh5.innerHTML = "EVENTS";
-// console.log(tituloh5);
+    // // Títulos y parrafos en card carrusel details
 
-// // Añade el título a parrafoprincipal fuera del bucle
-// parrafoprincipal.appendChild(tituloh5);
+    // let parrafoprincipal = document.getElementById("parrafo-principal");
 
-// // Crea los contenedores para las dos columnas
-// let columna1 = document.createElement("div");
-// columna1.classList.add("container","col-md-6");
-// console.log(columna1);
-// let columna2 = document.createElement("div");
-// columna2.classList.add("container","col-md-6");
+    // // Crea el título fuera del bucle
+    // let tituloh5 = document.createElement("h5");
+    // tituloh5.classList.add("card-title");
+    // tituloh5.innerHTML = "EVENTS";
+    // console.log(tituloh5);
 
-// console.log(columna2);
+    // // Añade el título a parrafoprincipal fuera del bucle
+    // parrafoprincipal.appendChild(tituloh5);
 
-// // Añade las columnas a parrafoprincipal
-// parrafoprincipal.appendChild(columna1);
-// parrafoprincipal.appendChild(columna2);
+    // // Crea los contenedores para las dos columnas
+    // let columna1 = document.createElement("div");
+    // columna1.classList.add("container","col-md-6");
+    // console.log(columna1);
+    // let columna2 = document.createElement("div");
+    // columna2.classList.add("container","col-md-6");
 
-// for (let i = 0; i < data.events.length; i++) {
-//   let parrafodetail = document.createElement("p");
-//   parrafodetail.classList.add("card-text");
-//   parrafodetail.innerHTML = `${data.events[i].name}`;
-//   console.log(parrafodetail);
+    // console.log(columna2);
 
-//   // Decide en qué columna agregar el párrafo
-//   if (i < 7) {
-//     columna1.appendChild(parrafodetail);
-//   } else {
-//     columna2.appendChild(parrafodetail);
-//   }
-// }
+    // // Añade las columnas a parrafoprincipal
+    // parrafoprincipal.appendChild(columna1);
+    // parrafoprincipal.appendChild(columna2);
+
+    // for (let i = 0; i < data.events.length; i++) {
+    //   let parrafodetail = document.createElement("p");
+    //   parrafodetail.classList.add("card-text");
+    //   parrafodetail.innerHTML = `${data.events[i].name}`;
+    //   console.log(parrafodetail);
+
+    //   // Decide en qué columna agregar el párrafo
+    //   if (i < 7) {
+    //     columna1.appendChild(parrafodetail);
+    //   } else {
+    //     columna2.appendChild(parrafodetail);
+    //   }
+    // }
+
+  });
